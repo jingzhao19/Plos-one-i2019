@@ -1,0 +1,2494 @@
+
+data r1n3;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r1n3.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r1n3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r1n3_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r1n3_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r1n3;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r1n3.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r1n3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r1n3_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r1n3_slice.csv" dbms=csv
+replace;
+run;
+DATA Time1;
+  SET r1n3;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n3_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r1n3;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n3_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r1n3;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n3_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r1n3;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n3_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r1n3;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n3_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r1n6;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r1n6.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r1n6;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r1n6_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r1n6_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r1n6;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r1n6.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r1n6;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r1n6_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r1n6_slice.csv" dbms=csv
+replace;
+run;
+
+DATA Time1;
+  SET r1n6;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n6_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r1n6;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n6_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r1n6;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n6_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r1n6;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n6_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r1n6;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n6_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r1n12;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r1n12.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r1n12;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r1n12_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r1n12_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r1n12;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r1n12.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r1n12;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r1n12_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r1n12_slice.csv" dbms=csv
+replace;
+run;
+
+DATA Time1;
+  SET r1n12;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n12_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r1n12;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n12_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r1n12;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n12_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r1n12;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n12_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r1n12;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r1n12_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+
+data r3n3;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r3n3.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r3n3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r3n3_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r3n3_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+data r3n3;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r3n3.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r3n3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r3n3_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r3n3_slice.csv" dbms=csv
+replace;
+run;
+DATA Time1;
+  SET r3n3;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n3_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r3n3;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n3_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r3n3;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n3_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r3n3;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n3_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r3n3;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n3_anova_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+data r3n6;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r3n6.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r3n6;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r3n6_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r3n6_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+data r3n6;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r3n6.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r3n6;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r3n6_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r3n6_slice.csv" dbms=csv
+replace;
+run;
+
+DATA Time1;
+  SET r3n6;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n6_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r3n6;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n6_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r3n6;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n6_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r3n6;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n6_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r3n6;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n6_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r3n12;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r3n12.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r3n12;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r3n12_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r3n12_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r3n12;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r3n12.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r3n12;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r3n12_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r3n12_slice.csv" dbms=csv
+replace;
+run;
+
+DATA Time1;
+  SET r3n12;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n12_T1.csv" dbms=csv
+replace;
+run;
+
+DATA time2;
+  SET r3n12;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n12_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r3n12;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n12_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r3n12;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n12_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r3n12;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r3n12_T5.csv" dbms=csv
+replace;
+run;
+
+
+data r6n3;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r6n3.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r6n3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r6n3_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r6n3_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r6n3;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r6n3.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r6n3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r6n3_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r6n3_slice.csv" dbms=csv
+replace;
+run;
+DATA Time1;
+  SET r6n3;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n3_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r6n3;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n3_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r6n3;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n3_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r6n3;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n3_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r6n3;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n3_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r6n6;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r6n6.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r6n6;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r6n6_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r6n6_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r6n6;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r6n6.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r6n6;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r6n6_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r6n6_slice.csv" dbms=csv
+replace;
+run;
+
+DATA Time1;
+  SET r6n6;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n6_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r6n6;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n6_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r6n6;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n6_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r6n6;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n6_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r6n6;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n6_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r6n12;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r6n12.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r6n12;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r6n12_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r6n12_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r6n12;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r6n12.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r6n12;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r6n12_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r6n12_slice.csv" dbms=csv
+replace;
+run;
+
+DATA Time1;
+  SET r6n12;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n12_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r6n12;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n12_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r6n12;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n12_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r6n12;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n12_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r6n12;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r6n12_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+
+data r9n3;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r9n3.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r9n3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r9n3_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r9n3_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+data r9n3;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r9n3.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r9n3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r9n3_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r9n3_slice.csv" dbms=csv
+replace;
+run;
+DATA Time1;
+  SET r9n3;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n3_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r9n3;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n3_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r9n3;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n3_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r9n3;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n3_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r9n3;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n3_anova_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+data r9n6;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r9n6.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r9n6;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r9n6_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r9n6_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+data r9n6;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r9n6.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r9n6;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r9n6_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r9n6_slice.csv" dbms=csv
+replace;
+run;
+
+DATA Time1;
+  SET r9n6;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n6_T1.csv" dbms=csv
+replace;
+run;
+
+
+DATA time2;
+  SET r9n6;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n6_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r9n6;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n6_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r9n6;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n6_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r9n6;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n6_T5.csv" dbms=csv
+replace;
+run;
+
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r9n12;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r9n12.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r9n12;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=ARH(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r9n12_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_arh_r9n12_slice.csv" dbms=csv
+replace;
+run;
+
+dm 'log;clear;output;clear;';
+dm 'odsresults; clear';;
+
+data r9n12;
+infile 'C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\P5_alter_arh_r9n12.csv' delimiter=',' MISSOVER FIRSTOBS=2;
+input Trt Subject Time X1-X1000;
+run;
+
+%let scores = X1-X1000;
+data want ; set r9n12;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    score=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc mixed data=want;
+      by name;
+      class Trt Time subject;
+      model score = Trt | time;
+      repeated Time/subject=subject(trt) type=AR(1);
+	  lsmeans Trt*time / slice=time; 
+	  ods output Tests3 = main;
+      ods output Slices = time;
+run;
+proc export data=main dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r9n12_main.csv" dbms=csv
+replace;
+run;
+proc export data=time dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_ar_r9n12_slice.csv" dbms=csv
+replace;
+run;
+
+DATA Time1;
+  SET r9n12;
+IF (Time ="1");
+run;
+
+%let scores = X1-X1000;
+data t1 ; set time1;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret1=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t1;
+      by name;
+      class Trt;
+      model scoret1 = Trt;
+	  ods output overallANOVA = tp1;
+run;
+proc export data=tp1 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n12_T1.csv" dbms=csv
+replace;
+run;
+
+DATA time2;
+  SET r9n12;
+IF (Time ="2");
+run;
+%let scores = X1-X1000;
+data t2 ; set time2;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret2=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t2;
+      by name;
+      class Trt;
+      model scoret2 = Trt;
+	  ods output  overallANOVA = tp2;
+run;
+proc export data=tp2 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n12_T2.csv" dbms=csv
+replace;
+run;
+
+
+DATA time3;
+  SET r9n12;
+IF (Time ="3");
+run;
+%let scores = X1-X1000;
+data t3 ; set time3;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret3=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t3;
+      by name;
+      class Trt;
+      model scoret3 = Trt;
+	  ods output overallANOVA = tp3;
+run;
+proc export data=tp3 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n12_T3.csv" dbms=csv
+replace;
+run;
+
+DATA time4;
+  SET r9n12;
+IF (Time ="4");
+run;
+%let scores = X1-X1000;
+data t4 ; set time4;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret4=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t4;
+      by name;
+      class Trt;
+      model scoret4 = Trt;
+	  ods output  overallANOVA = tp4;
+run;
+proc export data=tp4 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n12_T4.csv" dbms=csv
+replace;
+run;
+
+DATA time5;
+  SET r9n12;
+IF (Time ="5");
+run;
+%let scores = X1-X1000;
+data t5 ; set time5;
+  array scores &scores ;
+  do i=1 to dim(scores);
+    scoret5=scores(i);
+    name=vname(scores(i));
+    output;
+  end;
+ run;
+ proc sort; by name ; run;
+proc glm data=t5;
+      by name;
+      class Trt;
+      model scoret5 = Trt;
+	  ods output overallANOVA = tp5;
+run;
+proc export data=tp5 dbms=xlsx
+outfile="C:\Jing STATS\creative component\2018\simulation\5 time point simulation\5 point alter model\arh\result_arh_anova_r9n12_T5.csv" dbms=csv
+replace;
+run;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

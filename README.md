@@ -33,7 +33,7 @@ I. Parameters for simulation study:
 2.	Parameter_alter_model: Dataset about Mean and sd that were used to simulate alternative model.
 
 Parameters (alter model and null model dataset) used for simulations were extracted by plot digitizer software Version 2.1 
-(Zein et al. 2015) from the study (Cho et al. 2013). We conducted two sets of simulations corresponding to a null model, and an 
+from the study (Cho et al. 2013). We conducted two sets of simulations corresponding to a null model, and an 
 alternative model. There was no treatment and treatment x time interaction effect under the null model, in contrasts to the 
 alternative model. The population parameter (means and sds) used for the null model and alternative model simulations are summarized
 in above two datasets: null model and alter model.
@@ -41,16 +41,16 @@ in above two datasets: null model and alter model.
 
 II. Simulation code for four sets of models using R.
 
-1.	Simulation_Code_Null_CSH_Model: 
+1.	Code_R_Simulation_Null_CSH_Model: 
       R code for simulate Null model with heterogenous compound symmetry variance covariance structure
       
-2.	Simulation_Code_Null_ARH_Model: 
+2.	Code_R_Simulation_Null_ARH_Model: 
       R code for simulate Null model with heterogenous first-order autoregressive variance covariance structure.
       
-3.	Simulation_Code_Alternative_CSH_Model: 
+3.	Code_R_Simulation_Alternative_CSH_Model: 
       R code for simulate Alternative model with heterogenous compound symmetry variance covariance structure.
       
-4.	Simulation_Code_Alternative_ARH_Model:
+4.	Code_R_Simulation_Alternative_ARH_Model:
       R code for simulate Alternative model with heterogenous first order autoregressive variance covariance structure.
 
 The data simulation condition of each pair of null and alternative model were factorial combinations of the following: (i) two possible
@@ -68,16 +68,19 @@ Where Y_ijk is the bodyweight for treatment i subject j, and time k, D_i represe
 
 III. Data analysis code for 1000 simulated datasets from aboved four sets of models using SAS:
 
-1.	Analysis_SAS_Code_Null CSH model:
+1.	Code_SAS_Analysis_Null CSH model:
       SAS code for analyzing 1000 dataset simulated from the null model with heterogenous compound symetry variance covariance
       structure.
-2.	Analysis_SAS_Code_Null ARH model:
+      
+2.	Code_SAS_Analysis_Null ARH model:
       SAS code for analyzing 1000 dataset simulated from the null model with heterogenous first order autoregressive variance
       coveraince structure.
-3.	Analysis_SAS_Code_Alternative_CSH_model:
+      
+3.	Code_SAS_Analysis_Alternative_CSH_model:
       SAS code for analyzing 1000 dataset simulated from the alternative model with heterogenous compound symetry variance covariance
       structure.
-4.	Analysis_SAS_Code_Alternative_ARH model:
+      
+4.	Code_SAS_Analysis_Alternative_ARH model:
       SAS code for analyzing 1000 dataset simulated from the alternative model with heterogenous first order autoregressive variance
       covariance structure.
 
@@ -86,11 +89,58 @@ Analyses of the simulated datasets were performed using SAS PROC MIXED and PROC 
 For model 1 and 2, the PROC MIXED procedure (model = Treatment | Time with subject nested in time, type = covariance structure) was used. PROC GLM procedure (model=Treatment) was applied for separate ANOVA analysis at specific time point in (iii). Using one simulated scenario (covariance structure = CSHetro, n=3, and ρ=0.1) as an example, we initially fit the covariance structure type = CSHetro (the same structure of the simulation) using PROC MIXED procedure. The same data was then fit covariance structure type = CSHomo, i.e. ignoring the heterogenous variance at the diagonal of the variance-covariance matrix. For analysis (i) and (ii), main effects including treatment, time, treatment x time interaction, and effect at each time point where estimated using the slice function in PROC MIXED procedure for each of the 1000 replicates. For analysis (iii), only treatment effect at each time point was estimated by separate ANOVA using PROC GLM procedure. 
 
 
+IV. Code and Result of P-value distribution for different simulation setting.
+
+R code for generating P-value distribution of three models:
+
+1.	Code_R_tiff_fig_Null CSH model:
+      R code for making figure of p-value distribution of 1000 datasets of three models of each simulated model from the null model with
+      heterogenous compound symetry variance covariance structure.
+      
+2.	Code_R_tiff_fig_Null ARH model:
+      R code for making figure p-value distribution of 1000 datasets of three models of each simulated model from the null model with
+      heterogenous first order autoregressive variance covariance structure.
+      
+3.	Code_R_tiff_fig_Alternative_CSH_model:
+      R code for making figure p-value distribution of 1000 datasets of three models of each simulated model from the alternative model
+      with heterogenous compound symetry variance covariance structure.
+      
+4.	Code_R_tiff_fig_Alternative_ARH model:
+      R code for making figure p-value distribution of 1000 datasets of three models of each simulated model from the alternative model
+      with heterogenous compound symetry variance covariance structure.
 
 
-IV. Result for different simulation 
-as listed in 
+Results from the first, second, and third model .denoted by heterogenous-CS/Heterogenous-AR, homogenous-CS/Homogenous-AR, and separate ANOVA, respectively were listed as followed files. 
+      
+1.    arh_alter_r1n12.tiff
+      Result of P-value distribution based on analyzed result from 1000 simulated dataset (Alternative model, heterogenous first order
+      autoregressive variance structure, r=0.1 and group size=12) on three model: RM analysis with heterogenous AR variance structure
+      (denote by heterogenous-AR), RM analysis with homogenous AR variance structure (denote by homogenous-AR) and separate ANOVA.
+      .
+      .
+      .
+13.    arh_null_r1n3.tiff
+      Figure of result of P value distribution based on analyzed result from 1000 dataset (Null model, heterogenous first order 
+      autoregressive variance structure) on three model: RM analysis with heterogenous AR variance structure (denote by heterogenous-
+      AR), RM analysis with homogenous AR variance structure (denote by homogenous-AR) and separate ANOVA.
+      .
+      .
+      .
+25.    csh_alter_r1n3.tiff
+      Figure of result of P value distribution based on analyzed result from 1000 dataset(Alternative model, heterogenous compound 
+      symmetry variance structure) on three model: RM analysis with heterogenous-CS(denote by heterogenous-AR), RM analysis with
+      homogenous-CS variance structure (denote by homogenous-AR) and separate ANOVA.
+      .
+      .
+      .
+37.    csh_null_r1n3.tiff
+      Figure of result of P value distribution based on analyzed result from 1000 dataset (Null model, heterogenous first order
+      autoregressive vairance structure) on three model: RM analysis with heterogenous-CS(denote by heterogenous-AR), RM analysis with
+      homogenous-CS variance structure (denote by homogenous-AR) and separate ANOVA.
+      .
+      .
+      .
 
-Results from the first, second, and third model were denoted by heterogenous-CS/Heterogenous-AR, homogenous-CS/Homogenous-AR, and separate ANOVA, respectively.  The P value of analysis of 1000 simulated data point for three models were then plotted together using R package ggplot2.
+
 
 

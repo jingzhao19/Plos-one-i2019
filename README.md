@@ -111,7 +111,8 @@ R code for generating P-value distribution of three models:
 
 
 Results from the first, second, and third model denoted by heterogenous-CS/Heterogenous-AR, homogenous-CS/Homogenous-AR, and separate ANOVA of 48 simulations were the 48 tiff files in https://github.com/jingzhao19/Plos-one-i2019.git. The meaning of those tiff file was illustrated from the following sample files.
-e.g.,
+
+For example,
 
 1.    arh_alter_r1n12.tiff :
       Result of P-value distribution based on analyzed result from 1000 simulated datasets (Alternative model, heterogenous first order

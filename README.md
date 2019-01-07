@@ -116,9 +116,10 @@ Results from the first, second, and third model .denoted by heterogenous-CS/Hete
       Result of P-value distribution based on analyzed result from 1000 simulated dataset (Alternative model, heterogenous first order
       autoregressive variance structure, r=0.1 and group size=12) on three model: RM analysis with heterogenous AR variance structure
       (denote by heterogenous-AR), RM analysis with homogenous AR variance structure (denote by homogenous-AR) and separate ANOVA.
-      .
-      .
-      .
+.
+.
+.
+
 13.    arh_null_r1n3.tiff
       Figure of result of P value distribution based on analyzed result from 1000 dataset (Null model, heterogenous first order 
       autoregressive variance structure) on three model: RM analysis with heterogenous AR variance structure (denote by heterogenous-

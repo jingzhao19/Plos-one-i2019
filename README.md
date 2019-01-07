@@ -110,37 +110,28 @@ R code for generating P-value distribution of three models:
       with heterogenous compound symetry variance covariance structure.
 
 
-Results from the first, second, and third model .denoted by heterogenous-CS/Heterogenous-AR, homogenous-CS/Homogenous-AR, and separate ANOVA, respectively were listed as followed files. 
-      
-1.    arh_alter_r1n12.tiff
-      Result of P-value distribution based on analyzed result from 1000 simulated dataset (Alternative model, heterogenous first order
+Results from the first, second, and third model denoted by heterogenous-CS/Heterogenous-AR, homogenous-CS/Homogenous-AR, and separate ANOVA of 48 simulations were the 48 tiff files in https://github.com/jingzhao19/Plos-one-i2019.git. The meaning of those tiff file was illustrated from the following sample files.
+e.g.,
+
+1.    arh_alter_r1n12.tiff :
+      Result of P-value distribution based on analyzed result from 1000 simulated datasets (Alternative model, heterogenous first order
       autoregressive variance structure, r=0.1 and group size=12) on three model: RM analysis with heterogenous AR variance structure
       (denote by heterogenous-AR), RM analysis with homogenous AR variance structure (denote by homogenous-AR) and separate ANOVA.
-.
-.
-.
 
-13.    arh_null_r1n3.tiff
-      Figure of result of P value distribution based on analyzed result from 1000 dataset (Null model, heterogenous first order 
+2.    arh_null_r1n3.tiff :
+      Figure of result of P value distribution based on analyzed result from 1000 datasets (Null model, heterogenous first order 
       autoregressive variance structure) on three model: RM analysis with heterogenous AR variance structure (denote by heterogenous-
       AR), RM analysis with homogenous AR variance structure (denote by homogenous-AR) and separate ANOVA.
-      .
-      .
-      .
-25.    csh_alter_r1n3.tiff
-      Figure of result of P value distribution based on analyzed result from 1000 dataset(Alternative model, heterogenous compound 
-      symmetry variance structure) on three model: RM analysis with heterogenous-CS(denote by heterogenous-AR), RM analysis with
-      homogenous-CS variance structure (denote by homogenous-AR) and separate ANOVA.
-      .
-      .
-      .
-37.    csh_null_r1n3.tiff
-      Figure of result of P value distribution based on analyzed result from 1000 dataset (Null model, heterogenous first order
-      autoregressive vairance structure) on three model: RM analysis with heterogenous-CS(denote by heterogenous-AR), RM analysis with
-      homogenous-CS variance structure (denote by homogenous-AR) and separate ANOVA.
-      .
-      .
-      .
+      
+3.    csh_alter_r3n3.tiff :
+      Figure of result of P value distribution based on analyzed result from 1000 datasets (Alternative model, heterogenous compound 
+      symmetry variance structure, r=0.3 and group size=3) on three model: RM analysis with heterogenous-CS(denote by heterogenous-AR),
+      RM analysis with homogenous-CS variance structure (denote by homogenous-AR) and separate ANOVA.
+  
+4.    csh_null_r9n6.tiff :
+      Figure of result of P value distribution based on analyzed result from 1000 datasets (Null model, heterogenous first order
+      autoregressive vairance structure, r=0.9 and group size=6) on three model: RM analysis with heterogenous-CS(denote by
+      heterogenous-AR), RM analysis with homogenous-CS variance structure (denote by homogenous-AR) and separate ANOVA.
 
 
 
